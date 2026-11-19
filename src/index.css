@@ -1,0 +1,303 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/manrope';
+
+/*
+ * Same visual language as Winner for Life: light by default, white surfaces, near-black ink, one pink accent.
+ * Dark is pure black with neutral greys. Every color is a CSS variable, so the themes are two :root blocks.
+ * Metric colors: steps (= accent), sleep (purple), heart (red), battery (blue), stress (orange), train (teal), star (amber).
+ */
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --surface-2: #f2f2f4;
+  --surface-3: #e9e9ec;
+  --ink: #0f0f0f;
+  --ink-2: #2e2e33;
+  --muted: #7c7c84;
+  --faint: #a9a9b0;
+  --line: #ececef;
+  --scrim: rgb(0 0 0 / 0.4);
+
+  --brand: #e01d61;
+  --brand-soft: #fde8ef;
+
+  --steps: #e01d61;
+  --steps-strong: #b5104b;
+  --steps-soft: #fde8ef;
+  --sleep: #7c5cfa;
+  --sleep-strong: #5c3ce4;
+  --sleep-soft: #efeaff;
+  --heart: #e5484d;
+  --heart-strong: #b4232a;
+  --heart-soft: #fdecec;
+  --battery: #0b84f3;
+  --battery-strong: #0659a8;
+  --battery-soft: #e2f0fe;
+  --stress: #f97316;
+  --stress-strong: #b84d06;
+  --stress-soft: #ffeedf;
+  --train: #0d9488;
+  --train-strong: #0f766e;
+  --train-soft: #dcf5f1;
+  --star: #f5a524;
+  --star-strong: #a65f00;
+  --star-soft: #fff3da;
+  --danger: #d92d20;
+  --danger-soft: #fdecea;
+
+  /* Solid header surfaces (Profile, Auth, Connect) and the night card. */
+  --hero: #e01d61;
+  --night: #16161a;
+
+  --nav-bg: #ffffff;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #000000;
+  --surface: #0e0e0e;
+  --surface-2: #181818;
+  --surface-3: #222222;
+  --ink: #f5f5f5;
+  --ink-2: #d0d0d0;
+  --muted: #8e8e93;
+  --faint: #5c5c61;
+  --line: #1e1e1e;
+  --scrim: rgb(0 0 0 / 0.7);
+
+  --brand: #f0306e;
+  --brand-soft: rgb(240 48 110 / 0.15);
+
+  --steps: #f0306e;
+  --steps-strong: #ff6b98;
+  --steps-soft: rgb(240 48 110 / 0.15);
+  --sleep: #957bff;
+  --sleep-strong: #b6a5ff;
+  --sleep-soft: rgb(149 123 255 / 0.15);
+  --heart: #ff5d63;
+  --heart-strong: #ff8f93;
+  --heart-soft: rgb(255 93 99 / 0.14);
+  --battery: #3aa0ff;
+  --battery-strong: #7cc0ff;
+  --battery-soft: rgb(58 160 255 / 0.15);
+  --stress: #ff8a3d;
+  --stress-strong: #ffa86e;
+  --stress-soft: rgb(255 138 61 / 0.14);
+  --train: #2dd4bf;
+  --train-strong: #5eead4;
+  --train-soft: rgb(45 212 191 / 0.14);
+  --star: #ffb733;
+  --star-strong: #ffc95c;
+  --star-soft: rgb(255 183 51 / 0.14);
+  --danger: #ff5d55;
+  --danger-soft: rgb(255 93 85 / 0.14);
+
+  --hero: #e01d61;
+  --night: #121212;
+
+  --nav-bg: #000000;
+
+  color-scheme: dark;
+}
+
+/* Custom accent: the user's cover color (set by setAccent in src/app/theme.ts) recolors the accent everywhere. */
+:root[data-accent] {
+  --brand: var(--accent);
+  --brand-soft: color-mix(in oklab, var(--accent) 12%, white);
+  --steps: var(--brand);
+  --steps-strong: color-mix(in oklab, var(--accent) 78%, black);
+  --steps-soft: var(--brand-soft);
+  --hero: var(--accent);
+}
+
+:root[data-theme='dark'][data-accent] {
+  --brand: color-mix(in oklab, var(--accent) 88%, white);
+  --brand-soft: color-mix(in oklab, var(--accent) 15%, transparent);
+  --steps-strong: color-mix(in oklab, var(--accent) 60%, white);
+}
+
+@theme inline {
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-scrim: var(--scrim);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-steps: var(--steps);
+  --color-steps-strong: var(--steps-strong);
+  --color-steps-soft: var(--steps-soft);
+  --color-sleep: var(--sleep);
+  --color-sleep-strong: var(--sleep-strong);
+  --color-sleep-soft: var(--sleep-soft);
+  --color-heart: var(--heart);
+  --color-heart-strong: var(--heart-strong);
+  --color-heart-soft: var(--heart-soft);
+  --color-battery: var(--battery);
+  --color-battery-strong: var(--battery-strong);
+  --color-battery-soft: var(--battery-soft);
+  --color-stress: var(--stress);
+  --color-stress-strong: var(--stress-strong);
+  --color-stress-soft: var(--stress-soft);
+  --color-train: var(--train);
+  --color-train-strong: var(--train-strong);
+  --color-train-soft: var(--train-soft);
+  --color-star: var(--star);
+  --color-star-strong: var(--star-strong);
+  --color-star-soft: var(--star-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --color-hero: var(--hero);
+  --color-night: var(--night);
+
+  /* iOS-style sheet curve: fast start, long soft settle. */
+  --animate-sheet-in: sheet-in 460ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  /* Exit keyframes need their own names: reusing sheet-in/fade-in with `reverse`
+     doesn't restart the animation, so it snaps and animationend never fires. */
+  --animate-sheet-out: sheet-out 280ms cubic-bezier(0.4, 0, 0.9, 0.4) both;
+  --animate-fade-in: fade-in 300ms ease-out both;
+  --animate-fade-out: fade-out 280ms ease-in both;
+  --animate-pop: pop 380ms cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  --animate-rise: rise 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-draw: draw 1600ms cubic-bezier(0.6, 0, 0.2, 1) both;
+  --animate-grow: grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-grow-x: grow-x 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-beat: beat 1.2s ease-in-out infinite;
+  --animate-reveal: reveal 1100ms cubic-bezier(0.5, 0, 0.2, 1) both;
+
+  @keyframes sheet-in {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes sheet-out {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.9) translateY(6px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  /* SVG line drawing: the path needs pathLength="1" and stroke-dasharray="1". */
+  @keyframes draw {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+  /* Bars growing from their baseline (origin-bottom). */
+  @keyframes grow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+  @keyframes grow-x {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  /* Charts drawn left to right (works with stretched SVGs, unlike stroke-dashoffset). */
+  @keyframes reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.16); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.08); }
+    56% { transform: scale(1); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    background: var(--bg);
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    overscroll-behavior-y: none;
+    transition: background-color 300ms ease, color 300ms ease;
+  }
+  *,
+  *:focus,
+  *:focus-visible {
+    outline: none;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 30%, transparent);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility safe-top {
+  padding-top: max(env(safe-area-inset-top), 12px);
+}
+
+@utility safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 8px);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Card surface: flat, with a hairline border drawn as a ring so it takes no layout space. */
+@utility surface-card {
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* Big display numbers. */
+@utility display {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
